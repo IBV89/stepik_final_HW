@@ -10,7 +10,8 @@ class ProductPage(BasePage):
         self.should_equal_cost_of_cart_and_cost_of_product()
 
     def should_not_to_be_success_message(self):
-        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_TEXT), 'Success text about added product to cart is here, but should not be'
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_TEXT),\
+            'Success text is present, but not to be'
 
     def should_add_to_cart_message(self):
         cart_link = self.browser.find_element(*ProductPageLocators.ADD_TO_CART_BUTTON)
@@ -31,3 +32,7 @@ class ProductPage(BasePage):
         total_cost = self.browser.find_element(*ProductPageLocators.TOTAL_COST).text
         cost_of_product = self.browser.find_element(*ProductPageLocators.COST_OF_PRODUCT).text
         assert total_cost == cost_of_product, 'Prices of cart and of product is not equal'
+
+    def should_be_is_disappeared(self):
+        assert self.is_disappeared(*ProductPageLocators.SUCCESS_TEXT),\
+            'Text about success should be_disappeared, but it shouldnt'
